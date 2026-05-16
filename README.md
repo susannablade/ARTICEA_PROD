@@ -6,7 +6,7 @@ The project explores how generative systems can mediate encounters between users
 
 ---
 
-# Using AI to Support Human Interpretation
+## Using AI to Support Human Interpretation
 
 Echo Archive is designed to bring users closer to artwork by intertwining their own ideas with archival material from the Art Institute of Chicago, supported by text-based generative AI.
 
@@ -14,7 +14,7 @@ The application intentionally positions AI as an interpretive layer rather than 
 
 ---
 
-# Tech Stack
+## Tech Stack
 
 * Streamlit
 * Python
@@ -25,7 +25,7 @@ The application intentionally positions AI as an interpretive layer rather than 
 
 ---
 
-# System Architecture
+## System Architecture
 
 ```text
 User Concepts / Reflection Input
@@ -46,57 +46,52 @@ Email Archival System
 
 ---
 
-# Key Design Decisions Across User Workflow
+## Key Design Decisions Across User Workflow
 
-## 1. User Input
+### 1. User Input
 
-Having the user define concepts before viewing the work encourages their own intelligence — rather than only the AI’s — to draw connections between lived experience and artwork.
+User first inputs a concept(s) they’ve been thinking of, then selects “Find an Artwork”
 
-The interaction begins with the user’s thoughts first, positioning interpretation as something collaborative rather than fully automated.
+Why: Having the user define concepts before viewing the work forces their own intelligence or supportive intelligence (AI) to draw connections between their real world and the art.
 
----
 
-## 2. Artwork Retrieval
+### 2. Artwork Retrieval
 
-A random artwork is selected through the use of randomized pagination and metadata filtering. This creates surprise & delight for the user, allowing for one-of-a-kind encounters with artwork they may not have intentionally searched for themselves.
+A random artwork is selected through the use of randomized pagination and metadata filtering. 
 
-Artwork is filtered to prioritize pieces with richer contextual metadata so that later interpretive layers have stronger archival grounding.
+Why: "Surprise & Delight"; Allows users to have one of a kind experience.
 
----
+To note: Artwork is filtered to prioritize pieces with richer contextual metadata so that later interpretive layers have stronger archival grounding.
 
-## 3. AI-Assisted Descriptions
+### 3. AI-Assisted Descriptions
 
 Gemini 2.5 Flash is prompted to generate concise curatorial descriptions using metadata retrieved from the archive.
 
-The goal is not to replace museum interpretation, but to make the work feel alive to the viewer through material, historical, and atmospheric detail while avoiding overly academic language.
+Why: My goal is to make the work feel alive to the viewer. Rich descriptions achieve that goal. 
 
 Descriptions are intentionally constrained to remain concise, observational, and aesthetically attentive.
 
----
 
-## 4. Concept Connections
+### 4. Concept Connections
 
-Users can optionally ask Gemini to connect their concepts to the artwork.
+User can opt-in for Gemini to connect the work to their input
 
-This feature was intentionally designed as opt-in rather than automatic in consideration of:
-
+Why:
 * the environmental impact of generative AI
 * concerns around outsourcing human interpretation
 * the tendency for AI systems to force coherence where none exists
 
-If connections between the artwork and user input are weak, contradictory, or unexpected, the model is prompted to acknowledge tension or contrast rather than forcing symbolic agreement.
+To note: If connections between the artwork and user input are weak, contradictory, or unexpected, the model is prompted to acknowledge tension or contrast rather than forcing symbolic agreement.
 
----
 
-## 5. User Reflection
+### 5. User Reflection
 
-Users can write a personal reflection on the encounter with or without requesting AI interpretation.
+User can input a personal reflection of the work, with or without Gemini connecting concepts
 
-This creates space for human thought within the interface and reinforces the project’s interest in balancing human and machine interpretation rather than replacing one with the other.
+Why: Making space for the human thought and connection within the UI, pushing for a balance in a world of artificial thinking.
 
----
 
-## 6. Email Archival System
+### 6. Email Archival System
 
 Users can choose to have the details of the encounter sent to their email.
 
@@ -111,9 +106,9 @@ The intention is to allow users to create small personal archives of interpretiv
 
 ---
 
-# Gemini Prompt Decisions
+## Gemini Prompt Decisions
 
-## Separation of Description and Interpretation
+### Separation of Description and Interpretation
 
 Visual description and conceptual interpretation are handled independently in order to avoid redundancy and maintain clearer distinctions between observation and interpretation.
 
@@ -125,7 +120,7 @@ The application uses separate prompting layers for:
 
 ---
 
-## Interpretation Without Persona Simulation
+### Interpretation Without Persona Simulation
 
 The application intentionally avoids:
 
@@ -138,7 +133,7 @@ Instead, Gemini functions as an interpretive layer that connects user concepts t
 
 ---
 
-# Considerations During Development
+## Considerations During Development
 
 This iteration of Echo Archive was developed alongside ongoing questions surrounding:
 
@@ -150,49 +145,44 @@ This iteration of Echo Archive was developed alongside ongoing questions surroun
 
 ---
 
-# Known Issues
+## Known Issues
 
-## UI
+### UI
 
 * The button currently states “Connect my concepts to this artwork” even though the interpretation layer is prompted not to force weak connections between concepts and artwork
 * Certain flows within the reflection and email interaction still need refinement
 
----
-
-## Email System
+### Email System
 
 * Resend API is not currently connected to DNS records
 * Reflection state can reset during email submission under certain conditions
 * User input is not yet included in archival emails
 
----
-
-## Artwork Retrieval
+### Artwork Retrieval
 
 * Some ARTIC objects contain placeholder or non-art reference imagery despite image filtering
 * Metadata quality varies significantly across the archive
 
 ---
 
-# Things I Learned the Hard Way
+## Things I Learned the Hard Way
 
 * Always maintain a sandbox environment before deploying changes live
 * Double check `git remote -v` before pushing from local repositories
 * Run debugging and testing before deployment
 * Manage API keys carefully across `.env`, deployment environments, and repository settings
 * Metadata quality matters just as much as prompt engineering in generative systems
-* Small UX decisions dramatically shape how users interpret AI behavior
 
 ---
 
-# Future Directions
+## Future Directions
 
-* Develop phrasing that more accurately guides users through the interpretive process
-* Further refine prompt engineering and quality assurance workflows
-* Explore ways for users to compare their own interpretations with AI-generated connections
-* Develop a small archival dataset mapping recurring contemporary motifs to historical artwork
-* Experiment with deeper historical and symbolic linking systems using constrained datasets
-* Alternative exploration: focus specifically on Greek mythology and sculpture as a constrained interpretive archive
+* Change UI so that "Connect my Concepts" follows the user reflection rather than preceeds it 
+* Develop phrasing to more accurately walk user through process
+* Find ways to QA descriptions and interpretations; further manage AI prompts
+* Incorporate a chatbot so the user can interact with the “interpretation”
+* Develop a small database mapping modern motifs to ancient artwork (250 images max)
+* Alternative Project: Focus on Greek myths and statues; develop database, set gemini as translator connecting user input to specific storie
 
 ---
 
