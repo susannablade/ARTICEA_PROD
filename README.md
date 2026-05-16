@@ -1,21 +1,27 @@
----
-title: Echo Archive
-emoji: 🎨
-colorFrom: blue
-colorTo: indigo
-sdk: streamlit
-python_version: "3.11"
-app_file: app.py
-pinned: false
----
-
 # Echo Archive
 
 Echo Archive is an AI-assisted interpretive art experience built with Streamlit, Gemini 2.5 Flash, and the Art Institute of Chicago API.
 
-The application retrieves a random artwork from the Art Institute of Chicago collection and connects it to concepts, thoughts, or tensions provided by the user. Rather than positioning AI as a therapeutic or emotionally prescriptive voice, the system focuses on grounded visual analysis and conceptual association.
+The project explores how generative systems can mediate encounters between users and archival artwork while preserving ambiguity, interpretation, and human authorship. Rather than replacing interpretation, Echo Archive is designed to augment it — allowing users to bring their own concepts, tensions, and associations into conversation with artwork pulled from the archive.
 
-Echo Archive explores how generative systems can mediate encounters between users and archival material while preserving ambiguity, interpretation, and personal authorship.
+---
+
+# Using AI to Support Human Interpretation
+
+Echo Archive is designed to bring users closer to artwork by intertwining their own ideas with archival material from the Art Institute of Chicago, supported by text-based generative AI.
+
+The application intentionally positions AI as an interpretive layer rather than a companion, authority, or emotional surrogate. The goal is to create space for reflection, ambiguity, and personal connection while exploring how generative systems shape encounters with cultural archives.
+
+---
+
+# Tech Stack
+
+* Streamlit
+* Python
+* Google Gemini 2.5 Flash
+* Art Institute of Chicago API
+* Resend Email API
+* python-dotenv
 
 ---
 
@@ -24,8 +30,6 @@ Echo Archive explores how generative systems can mediate encounters between user
 ```text
 User Concepts / Reflection Input
         ↓
-[Art Institute of Chicago API]
-        ↓
 Artwork Retrieval + Metadata Filtering
         ↓
 Streamlit Artwork Display
@@ -33,8 +37,7 @@ Streamlit Artwork Display
 [Gemini 2.5 Flash]
 Concise Visual Description
         ↓
-[Gemini 2.5 Flash]
-Concept Connection Layer
+Optional AI Interpretation Layer
         ↓
 Optional User Reflection
         ↓
@@ -43,70 +46,153 @@ Email Archival System
 
 ---
 
-# Core Interaction Model
+# Key Design Decisions Across User Workflow
 
-The system separates interpretation into distinct stages:
+## 1. User Input
 
-### 1. Artwork Retrieval
-A random artwork is selected from the Art Institute of Chicago API and filtered for richer contextual metadata.
+Having the user define concepts before viewing the work encourages their own intelligence — rather than only the AI’s — to draw connections between lived experience and artwork.
 
-### 2. Visual Description
-Gemini generates a concise museum-style description focused on visible composition, material, subject matter, and form.
-
-### 3. Concept Connections
-The model connects the user's concepts or thoughts to visual and thematic elements within the artwork using a restrained curatorial tone.
-
-### 4. User Reflection
-Users can optionally write and archive their own reflections inspired by the encounter.
+The interaction begins with the user’s thoughts first, positioning interpretation as something collaborative rather than fully automated.
 
 ---
 
-# Key Design Decisions
+## 2. Artwork Retrieval
 
-## Retrieval Before Generation
+A random artwork is selected through the use of randomized pagination and metadata filtering. This creates surprise & delight for the user, allowing for one-of-a-kind encounters with artwork they may not have intentionally searched for themselves.
 
-The experience is grounded in real museum records rather than AI-generated imagery or fictional archives.
+Artwork is filtered to prioritize pieces with richer contextual metadata so that later interpretive layers have stronger archival grounding.
+
+---
+
+## 3. AI-Assisted Descriptions
+
+Gemini 2.5 Flash is prompted to generate concise curatorial descriptions using metadata retrieved from the archive.
+
+The goal is not to replace museum interpretation, but to make the work feel alive to the viewer through material, historical, and atmospheric detail while avoiding overly academic language.
+
+Descriptions are intentionally constrained to remain concise, observational, and aesthetically attentive.
+
+---
+
+## 4. Concept Connections
+
+Users can optionally ask Gemini to connect their concepts to the artwork.
+
+This feature was intentionally designed as opt-in rather than automatic in consideration of:
+
+* the environmental impact of generative AI
+* concerns around outsourcing human interpretation
+* the tendency for AI systems to force coherence where none exists
+
+If connections between the artwork and user input are weak, contradictory, or unexpected, the model is prompted to acknowledge tension or contrast rather than forcing symbolic agreement.
+
+---
+
+## 5. User Reflection
+
+Users can write a personal reflection on the encounter with or without requesting AI interpretation.
+
+This creates space for human thought within the interface and reinforces the project’s interest in balancing human and machine interpretation rather than replacing one with the other.
+
+---
+
+## 6. Email Archival System
+
+Users can choose to have the details of the encounter sent to their email.
+
+The archive includes:
+
+* artwork information
+* generated descriptions
+* concept connections
+* user reflections
+
+The intention is to allow users to create small personal archives of interpretive encounters rather than simply bookmarking a museum object.
+
+---
+
+# Gemini Prompt Decisions
+
+## Separation of Description and Interpretation
+
+Visual description and conceptual interpretation are handled independently in order to avoid redundancy and maintain clearer distinctions between observation and interpretation.
+
+The application uses separate prompting layers for:
+
+* visual description
+* conceptual interpretation
+* user reflection
+
+---
 
 ## Interpretation Without Persona Simulation
 
 The application intentionally avoids:
-- therapist-style AI behavior
-- emotional roleplay
-- mystical narration
-- companion-style interaction
 
-Instead, Gemini functions as an interpretive layer that connects user concepts to the artwork in an analytical and observational manner.
+* therapist-style AI behavior
+* emotional roleplay
+* mystical narration
+* companion-style interaction
 
-## Separation of Description and Interpretation
-
-Visual description and conceptual interpretation are handled independently to avoid redundancy and maintain clarity.
-
-## Human-Centered Reflection
-
-The final reflective layer belongs to the user rather than the model. The system supports interpretation without attempting to emotionally speak for the participant.
+Instead, Gemini functions as an interpretive layer that connects user concepts to artwork in an analytical, observational, and historically attentive manner.
 
 ---
 
-# Tech Stack
+# Considerations During Development
 
-- Streamlit
-- Python
-- Google Gemini 2.5 Flash
-- Art Institute of Chicago API
-- Resend Email API
-- python-dotenv
+This iteration of Echo Archive was developed alongside ongoing questions surrounding:
+
+* Environmental impact of generative AI
+* Outsourcing human interpretation to generative systems
+* Preserving ambiguity within AI-assisted experiences
+* The tension between computational interpretation and personal meaning
+* How archival material changes when mediated through generative interfaces
 
 ---
 
-# Core Features
+# Known Issues
 
-- Randomized artwork retrieval
-- Metadata-aware artwork filtering
-- AI-generated visual descriptions
-- Concept-to-artwork interpretation pipeline
-- User-authored reflections
-- Email archiving system
-- Session state persistence in Streamlit
+## UI
+
+* The button currently states “Connect my concepts to this artwork” even though the interpretation layer is prompted not to force weak connections between concepts and artwork
+* Certain flows within the reflection and email interaction still need refinement
+
+---
+
+## Email System
+
+* Resend API is not currently connected to DNS records
+* Reflection state can reset during email submission under certain conditions
+* User input is not yet included in archival emails
+
+---
+
+## Artwork Retrieval
+
+* Some ARTIC objects contain placeholder or non-art reference imagery despite image filtering
+* Metadata quality varies significantly across the archive
+
+---
+
+# Things I Learned the Hard Way
+
+* Always maintain a sandbox environment before deploying changes live
+* Double check `git remote -v` before pushing from local repositories
+* Run debugging and testing before deployment
+* Manage API keys carefully across `.env`, deployment environments, and repository settings
+* Metadata quality matters just as much as prompt engineering in generative systems
+* Small UX decisions dramatically shape how users interpret AI behavior
+
+---
+
+# Future Directions
+
+* Develop phrasing that more accurately guides users through the interpretive process
+* Further refine prompt engineering and quality assurance workflows
+* Explore ways for users to compare their own interpretations with AI-generated connections
+* Develop a small archival dataset mapping recurring contemporary motifs to historical artwork
+* Experiment with deeper historical and symbolic linking systems using constrained datasets
+* Alternative exploration: focus specifically on Greek mythology and sculpture as a constrained interpretive archive
 
 ---
 
