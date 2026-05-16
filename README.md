@@ -151,12 +151,17 @@ This iteration of Echo Archive was developed alongside ongoing questions surroun
 
 * The button currently states “Connect my concepts to this artwork” even though the interpretation layer is prompted not to force weak connections between concepts and artwork
 * Certain flows within the reflection and email interaction still need refinement
+To fix: 
+1) Change “Connect my concepts to this artwork” to a button that is more reflective of gemini outcomes
+2) Change the UI so that "Connect my concepts..." follows "User Reflection" rather than preceeding it. 
+
 
 ### Email System
 
 * Resend API is not currently connected to DNS records
 * Reflection state can reset during email submission under certain conditions
-* User input is not yet included in archival emails
+* User input is not yet included in archival emails (quick-fix)
+* To fix: switch from Resend to gmail 
 
 ### Artwork Retrieval
 
@@ -171,7 +176,7 @@ This iteration of Echo Archive was developed alongside ongoing questions surroun
 * Double check `git remote -v` before pushing from local repositories
 * Run debugging and testing before deployment
 * Manage API keys carefully across `.env`, deployment environments, and repository settings
-* Metadata quality matters just as much as prompt engineering in generative systems
+* Aligning 'requirements.txt', '.env', and 'app.py' so that imports and early config is set up appropriately
 
 ---
 
@@ -180,7 +185,7 @@ This iteration of Echo Archive was developed alongside ongoing questions surroun
 * Change UI so that "Connect my Concepts" follows the user reflection rather than preceeds it 
 * Develop phrasing to more accurately walk user through process
 * Find ways to QA descriptions and interpretations; further manage AI prompts
-* Incorporate a chatbot so the user can interact with the “interpretation”
+* Incorporate a chatbot so the user can interact with the “interpretation” & question if that aligns with the mission
 * Develop a small database mapping modern motifs to ancient artwork (250 images max)
 * Alternative Project: Focus on Greek myths and statues; develop database, set gemini as translator connecting user input to specific storie
 
