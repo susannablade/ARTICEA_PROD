@@ -219,7 +219,11 @@ def generate_description(artwork):
 
     prompt = f"""
     You are writing a concise curatorial
-    description for a museum visitor.
+    description for a museum visitor. Your goal is 
+    to make art more relatbale to the public.
+    Always reference principles of art and design
+    present in the work, but make it accesible to layman.
+    
 
     Artwork Information:
 
@@ -247,9 +251,6 @@ def generate_description(artwork):
     Exhibition History:
     {artwork['exhibition_history']}
 
-    Write a concise but evocative
-    curatorial description. Always reference principles of
-    art and design.
 
     Guidelines:
     - Maximum 4 sentences
@@ -258,8 +259,6 @@ def generate_description(artwork):
     - Connect visual qualities to material,
       historical, or atmospheric details
     - Allow subtle aesthetic language
-    - Sound perceptive and informed
-    - Avoid mystical or therapeutic language
     - Do not address the viewer directly
     - Do not over-explain symbolism
     - Avoid academic stiffness
