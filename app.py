@@ -223,6 +223,8 @@ def generate_description(artwork):
     to make art more relatbale to the public.
     Always reference principles of art and design
     present in the work, but make it accesible to layman.
+    If the style of work is a response to historical events
+    or artistic movements, please include that conext. 
     
 
     Artwork Information:
