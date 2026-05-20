@@ -248,7 +248,8 @@ def generate_description(artwork):
     {artwork['exhibition_history']}
 
     Write a concise but evocative
-    curatorial description.
+    curatorial description. Always reference principles of
+    art and design.
 
     Guidelines:
     - Maximum 4 sentences
@@ -308,7 +309,8 @@ def generate_interpretation(
     connecting the user's idea to the artwork. 
     If the connection is loose or unexpected,
     acknowledge the contrast or coincidence 
-    rather than forcing coherence.
+    rather than forcing coherence. Always end on a question
+    that invites the user to reflect on the artwork.
 
     Guidelines:
     - Use both visual and historical contex
@@ -448,7 +450,9 @@ st.write(
 with st.form("archive_form"):
 
     user_input = st.text_area(
-        "Share a concept that's been on your mind, then discover an artwork from the Art Institute of Chicago.",
+        "Share a concept that's been on your mind. " \
+        " Draw a random artwork from the Art Institute of Chicago." \
+        " Reflect on the connections or tensions that emerge.",
         placeholder=(
             "A concept, memory, tension, idea, or feeling..."
         ),
@@ -593,20 +597,12 @@ if st.session_state.artwork:
     # ---------------------------
     # USER REFLECTION
     # ---------------------------
-    st.markdown(
-        "### Your Reflection"
-    )
-
     reflection_text = st.text_area(
-        "Write a reflection on your experience and email the details of the " \
-        " encounter for your records.",
+        "Reflect independently here:",
         value=(
             st.session_state.reflection_text
         ),
         height=140,
-        placeholder=(
-            "What connections or tensions emerge for you?"
-        )
     )
 
     st.session_state.reflection_text = (
@@ -622,10 +618,8 @@ if st.session_state.artwork:
         "### Create a personal Archive"
     )
     email_input = st.text_input(
-        "Archive this encounter by sending the details to your email." 
-        " Enter your email address below and click the button to send."
-    )
-
+         "Archive this encounter by sending the details to your email.",
+    placeholder="email@example.com")
     send = st.button(
         "Send Archive to My Email"
     )
