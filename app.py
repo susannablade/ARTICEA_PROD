@@ -7,8 +7,9 @@ from dotenv import load_dotenv
 from google import genai
 import smtplib
 from email.message import EmailMessage
+from email.mime.text import MIMEText
 
-#
+
 # ---------------------------
 # CONFIG
 # ---------------------------
@@ -25,6 +26,9 @@ GMAIL_USER = os.getenv(
 GMAIL_APP_PASSWORD = os.getenv(
     "GMAIL_APP_PASSWORD"
 )
+
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = 587  # TLS Port
 
 ARTIC_API_URL = (
     "https://api.artic.edu/api/v1/artworks"
